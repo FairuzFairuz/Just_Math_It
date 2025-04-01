@@ -43,7 +43,7 @@ for (i = 1; i < 5; i++) {
         show("correct");
         setTimeout(function () {
           hide("correct");
-        }, 1000);
+        }, 2000);
         generateQA();
       } else {
         //wrong answer
@@ -51,21 +51,21 @@ for (i = 1; i < 5; i++) {
         show("wrong");
         setTimeout(function () {
           hide("wrong");
-        }, 1000);
+        }, 2000);
       }
     }
   };
 }
 
 let maxNumber = 10;
-function setDifficulty() {
+function setDifficulty(level) {
   const difficulty = document.getElementById("difficulty").value;
   if (difficulty === "easy") {
     maxNumber = 10;
   } else if (difficulty === "medium") {
-    maxNumber = 30;
+    maxNumber = 20;
   } else if (difficulty === "hard") {
-    maxNumber = 50;
+    maxNumber = 30;
   }
 }
 
@@ -108,13 +108,33 @@ function show(Id) {
 }
 //generate question
 function generateQA() {
+  let operators = ["+", "-", "*", "/"];
+  let selectedOperator =
+    operators[Math.floor(Math.random() * operators.length)];
   let x = 1 + Math.round(maxNumber * Math.random());
-  let y = 1 + Math.round(maxNumber * Math.random());
-  correctAnswer = x + y;
+  let y = 1 + Math.round((x - 1) * Math.random());
+  // to decide on correct answer based on operator
+  switch (selectedOperator) {
+    case "+":
+      correctAnswer = x + y;
+      break;
+    case "-":
+      correctAnswer = x - y;
+      break;
+    case "*":
+      correctAnswer = x * y;
+      break;
+    case "/":
+      correctAnswer = (x * y) / y;
+      break;
+  }
 
-  document.getElementById("question").innerHTML = x + " + " + y;
+  //to display question
+  document.getElementById(
+    "question"
+  ).innerHTML = `${x} ${selectedOperator} ${y} =`;
+
   let correctPosition = 1 + Math.round(3 * Math.random());
-
   document.getElementById("box" + correctPosition).innerHTML = correctAnswer; //correct answer
 
   //wrong answer options
@@ -124,12 +144,25 @@ function generateQA() {
     if (i != correctPosition) {
       let wrongAnswer;
       do {
-        wrongAnswer =
-          1 +
-          Math.round(maxNumber * Math.random()) +
-          (1 + Math.round(maxNumber * Math.random())); //wrong answer
-      } while (answers.indexOf(wrongAnswer) > -1);
-
+        let wrongX = 1 + Math.round(maxNumber * Math.random());
+        let wrongY = 1 + Math.round(maxNumber * Math.random());
+        let wrongOperator =
+          operators[Math.floor(Math.random() * operators.length)]; // Random operator
+        switch (wrongOperator) {
+          case "+":
+            wrongAnswer = wrongX + wrongY;
+            break;
+          case "-":
+            wrongAnswer = wrongX - wrongY;
+            break;
+          case "*":
+            wrongAnswer = wrongX * wrongY;
+            break;
+          case "/":
+            wrongAnswer = Math.floor((wrongX * wrongY) / wrongY);
+            break;
+        }
+      } while (answers.indexOf(wrongAnswer) > -1); // to ensure no duplicates
       document.getElementById("box" + i).innerHTML = wrongAnswer;
       answers.push(wrongAnswer);
     }
