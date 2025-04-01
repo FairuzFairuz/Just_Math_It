@@ -8,13 +8,21 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css" />
 
-    <title><h1>Math Game using JavaScript</h1></title>
+    <title>Math Game using JavaScript</title>
   </head>
 
   <body>
+    <div id="game">
+      <label for="difficulty">Select Difficulty:</label>
+      <select id="difficulty" onchange="setDifficulty()">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
     <div id="container">
       <div id="timeremaining">
-        Time remaining: <span id="timeremainingvalue"> 60</span>
+        Time remaining: <span id="timeremainingvalue"> 30</span>
       </div>
       <div id="score">
         score: <span id="scorevalue" style="font-weight: 900">0</span>
@@ -32,12 +40,6 @@
       <div id="startreset">Start Game</div>
       <div id="gameOver"></div>
     </div>
-
-    <script
-      src="https://code.jquery.com/jquery-3.6.3.js"
-      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-      crossorigin="anonymous"
-    ></script>
 
     <script src="script.js"></script>
   </body>

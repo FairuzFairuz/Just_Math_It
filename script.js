@@ -12,7 +12,7 @@ document.getElementById("startreset").onclick = function () {
     score = 0;
 
     document.getElementById("scorevalue").innerHTML = score;
-    //show count
+    //show countdown
     show("timeremaining");
     timeremaining = 30;
 
@@ -24,10 +24,10 @@ document.getElementById("startreset").onclick = function () {
     //change start to reset
     document.getElementById("startreset").innerHTML = "Reset Game";
 
-    //start count
+    //to begin countdown
     startCountdown();
 
-    //generate quetion
+    //to generate question
     generateQA();
   }
 };
@@ -57,7 +57,18 @@ for (i = 1; i < 5; i++) {
   };
 }
 
-//functions
+let maxNumber = 10;
+function setDifficulty() {
+  const difficulty = document.getElementById("difficulty").value;
+  if (difficulty === "easy") {
+    maxNumber = 10;
+  } else if (difficulty === "medium") {
+    maxNumber = 30;
+  } else if (difficulty === "hard") {
+    maxNumber = 50;
+  }
+}
+
 //timer countdown
 function startCountdown() {
   action = setInterval(function () {
@@ -70,7 +81,7 @@ function startCountdown() {
 
       //game over
       document.getElementById("gameOver").innerHTML =
-        "<p>Game over!</p><p>Your score is " + score + ".</p>";
+        "<p>Game over!</p><p>Your score is " + score + "</p>";
       hide("timeremaining");
       hide("correct");
       hide("wrong");
@@ -95,18 +106,18 @@ function hide(Id) {
 function show(Id) {
   document.getElementById(Id).style.display = "block";
 }
-//guestion
+//generate question
 function generateQA() {
-  let x = 1 + Math.round(9 * Math.random());
-  let y = 1 + Math.round(9 * Math.random());
-  correctAnswer = x * y;
+  let x = 1 + Math.round(maxNumber * Math.random());
+  let y = 1 + Math.round(maxNumber * Math.random());
+  correctAnswer = x + y;
 
-  document.getElementById("question").innerHTML = x + "x" + y;
-  var correctPosition = 1 + Math.round(3 * Math.random());
+  document.getElementById("question").innerHTML = x + " + " + y;
+  let correctPosition = 1 + Math.round(3 * Math.random());
 
   document.getElementById("box" + correctPosition).innerHTML = correctAnswer; //correct answer
 
-  //wrong answers
+  //wrong answer options
   let answers = [correctAnswer];
 
   for (i = 1; i < 5; i++) {
@@ -114,8 +125,9 @@ function generateQA() {
       let wrongAnswer;
       do {
         wrongAnswer =
-          (1 + Math.round(9 * Math.random())) *
-          (1 + Math.round(9 * Math.random())); //wrong answer
+          1 +
+          Math.round(maxNumber * Math.random()) +
+          (1 + Math.round(maxNumber * Math.random())); //wrong answer
       } while (answers.indexOf(wrongAnswer) > -1);
 
       document.getElementById("box" + i).innerHTML = wrongAnswer;
