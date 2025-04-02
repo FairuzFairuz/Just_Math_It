@@ -5,6 +5,7 @@ let timeremaining;
 let correctAnswer;
 
 document.getElementById("startreset").onclick = function () {
+  // change to event listener (dont use onclick)
   if (playing == true) {
     location.reload();
   } else {
@@ -12,6 +13,7 @@ document.getElementById("startreset").onclick = function () {
     score = 0;
 
     document.getElementById("scorevalue").innerHTML = score;
+
     //show countdown
     show("timeremaining");
     timeremaining = 30;
@@ -34,6 +36,7 @@ document.getElementById("startreset").onclick = function () {
 
 for (i = 1; i < 5; i++) {
   document.getElementById("box" + i).onclick = function () {
+    //change to event listener, dont use onclick
     if (playing == true) {
       if (this.innerHTML == correctAnswer) {
         //increase score
@@ -57,6 +60,7 @@ for (i = 1; i < 5; i++) {
   };
 }
 
+// define difficulty level
 let maxNumber = 10;
 function setDifficulty(level) {
   const difficulty = document.getElementById("difficulty").value;
@@ -65,7 +69,7 @@ function setDifficulty(level) {
   } else if (difficulty === "medium") {
     maxNumber = 20;
   } else if (difficulty === "hard") {
-    maxNumber = 30;
+    maxNumber = 50;
   }
 }
 
@@ -81,7 +85,7 @@ function startCountdown() {
 
       //game over
       document.getElementById("gameOver").innerHTML =
-        "<p>Game over!</p><p>Your score is " + score + "</p>";
+        "<p>Game Over</p><p>Your score is " + score + "</p>";
       hide("timeremaining");
       hide("correct");
       hide("wrong");
@@ -108,8 +112,8 @@ function show(Id) {
 }
 //generate question
 function generateQA() {
-  let operators = ["+", "-", "*", "/"];
-  let selectedOperator =
+  const operators = ["+", "-", "x", "÷"];
+  const selectedOperator =
     operators[Math.floor(Math.random() * operators.length)];
   let x = 1 + Math.round(maxNumber * Math.random());
   let y = 1 + Math.round((x - 1) * Math.random());
@@ -121,11 +125,12 @@ function generateQA() {
     case "-":
       correctAnswer = x - y;
       break;
-    case "*":
+    case "x":
       correctAnswer = x * y;
       break;
-    case "/":
-      correctAnswer = (x * y) / y;
+    case "÷":
+      x = x * y;
+      correctAnswer = x / y;
       break;
   }
 
@@ -144,9 +149,9 @@ function generateQA() {
     if (i != correctPosition) {
       let wrongAnswer;
       do {
-        let wrongX = 1 + Math.round(maxNumber * Math.random());
-        let wrongY = 1 + Math.round(maxNumber * Math.random());
-        let wrongOperator =
+        const wrongX = 1 + Math.round(maxNumber * Math.random());
+        const wrongY = 1 + Math.round(maxNumber * Math.random());
+        const wrongOperator =
           operators[Math.floor(Math.random() * operators.length)]; // Random operator
         switch (wrongOperator) {
           case "+":
@@ -155,10 +160,10 @@ function generateQA() {
           case "-":
             wrongAnswer = wrongX - wrongY;
             break;
-          case "*":
+          case "x":
             wrongAnswer = wrongX * wrongY;
             break;
-          case "/":
+          case "÷":
             wrongAnswer = Math.floor((wrongX * wrongY) / wrongY);
             break;
         }
