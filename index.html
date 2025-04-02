@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="styles.css" />
 
-    <title>Math Game using JavaScript</title>
+    <title>Just Math It</title>
     <style>
       select {
         font-size: 18px;
@@ -18,7 +18,6 @@
       }
     </style>
   </head>
-
   <body>
     <div id="game">
       <label for="difficulty">Select Difficulty:</label>
@@ -38,7 +37,18 @@
       <div id="correct">Well Done!</div>
       <div id="wrong">Let's try again!</div>
       <div id="question"></div>
-      <div id="instruction">Click on the correct answer</div>
+      <div
+        id="dropArea"
+        style="
+          border: 5px dashed greenyellow;
+          padding: 40px;
+          text-align: center;
+          border-radius: 30px;
+          font-size: 2em;
+        "
+      >
+        Drop your answer here
+      </div>
       <div id="choices">
         <div id="box1" class="box"></div>
         <div id="box2" class="box"></div>

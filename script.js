@@ -34,31 +34,47 @@ document.getElementById("startreset").onclick = function () {
   }
 };
 
-for (i = 1; i < 5; i++) {
-  document.getElementById("box" + i).onclick = function () {
-    //change to event listener, dont use onclick
-    if (playing == true) {
-      if (this.innerHTML == correctAnswer) {
-        //increase score
-        score++;
-        document.getElementById("scorevalue").innerHTML = score;
-        hide("wrong");
-        show("correct");
-        setTimeout(function () {
-          hide("correct");
-        }, 2000);
-        generateQA();
-      } else {
-        //wrong answer
-        hide("correct");
-        show("wrong");
-        setTimeout(function () {
-          hide("wrong");
-        }, 2000);
-      }
+for (let i = 1; i < 5; i++) {
+  const box = document.getElementById("box" + i);
+  box.setAttribute("draggable", true);
+
+  box.addEventListener("dragstart", function (event) {
+    if (playing) {
+      event.dataTransfer.setData("text", this.innerHTML);
     }
-  };
+  });
 }
+
+const dropArea = document.getElementById("dropArea");
+
+dropArea.addEventListener("dragover", function (event) {
+  event.preventDefault();
+});
+
+dropArea.addEventListener("drop", function (event) {
+  event.preventDefault();
+  if (playing) {
+    const droppedAnswer = event.dataTransfer.getData("text");
+    if (droppedAnswer == correctAnswer) {
+      // Increase score
+      score++;
+      document.getElementById("scorevalue").innerHTML = score;
+      hide("wrong");
+      show("correct");
+      setTimeout(function () {
+        hide("correct");
+      }, 2000);
+      generateQA();
+    } else {
+      // Wrong answer
+      hide("correct");
+      show("wrong");
+      setTimeout(function () {
+        hide("wrong");
+      }, 2000);
+    }
+  }
+});
 
 // define difficulty level
 let maxNumber = 10;
@@ -69,7 +85,7 @@ function setDifficulty(level) {
   } else if (difficulty === "medium") {
     maxNumber = 20;
   } else if (difficulty === "hard") {
-    maxNumber = 50;
+    maxNumber = 30;
   }
 }
 
