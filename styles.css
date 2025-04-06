@@ -1,18 +1,18 @@
 html {
   height: 100%;
-  background: turquoise;
+  background-color: hotpink;
 }
 
 #container {
-  height: 550px;
-  width: 550px;
-  background-color: hotpink;
+  height: 570px;
+  width: 570px;
+  background-color: turquoise;
   margin: 50px auto;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0px 4px 0px 0px #1e293b;
+  /* box-shadow: 0px 4px 0px 0px #1e293b; */
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: cursive;
 }
 
 #Score {
@@ -24,7 +24,7 @@ html {
 
 #correct {
   position: absolute;
-  left: 250px;
+  left: 300px;
   background-color: #42e252;
   color: white;
   padding: 5px 12px;
@@ -43,15 +43,14 @@ html {
 }
 
 #question {
-  width: 450px;
+  width: 500px;
   height: 150px;
   margin: 50px auto 10px auto;
-  background-color: rgb(red, green, blue);
-  font-size: 90px;
+  font-size: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: hotpink;
   border-radius: 20px;
 }
 
@@ -109,7 +108,7 @@ html {
 #startreset {
   width: 250px;
   padding: 20px;
-  background-color: lawngreen;
+  background-color: hotpink;
   margin: 0 auto;
   border-radius: 3px;
   cursor: pointer;
@@ -118,11 +117,11 @@ html {
   position: relative;
   transition: all 0.2s;
   border-radius: 20px;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 #timeremaining {
-  color: black;
+  color: white;
   padding: 10px;
   position: absolute;
   top: 10px;
@@ -143,7 +142,7 @@ html {
   text-transform: uppercase;
   position: absolute;
   top: 100px;
-  left: 45px;
+  left: 70px;
   z-index: 2;
   display: none;
   border-radius: 30px;

@@ -4,8 +4,7 @@ let action;
 let timeremaining;
 let correctAnswer;
 
-document.getElementById("startreset").onclick = function () {
-  // change to event listener (dont use onclick)
+document.getElementById("startreset").addEventListener("click", function () {
   if (playing == true) {
     location.reload();
   } else {
@@ -32,7 +31,7 @@ document.getElementById("startreset").onclick = function () {
     //to generate question
     generateQA();
   }
-};
+});
 
 for (let i = 1; i < 5; i++) {
   const box = document.getElementById("box" + i);
