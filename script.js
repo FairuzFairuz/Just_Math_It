@@ -132,6 +132,7 @@ function generateQA() {
     operators[Math.floor(Math.random() * operators.length)];
   let x = 1 + Math.round(maxNumber * Math.random());
   let y = 1 + Math.round((x - 1) * Math.random());
+
   // to decide on correct answer based on operator
   switch (selectedOperator) {
     case "+":
